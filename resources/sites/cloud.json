@@ -1,0 +1,5 @@
+{
+  "SkipWebConfig": false,
+  "WebConfigIndexFileUrl": "https://pocketstore-artifacts.s3.amazonaws.com/WebConfig/Cloud/IndexFile.json",
+  "LocalSite": "Private_Cloud"
+}
