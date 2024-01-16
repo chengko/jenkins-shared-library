@@ -1,7 +1,5 @@
 // src/common/upload.groovy
 
-package common
-
 //import static common.Project.NAME
 
 def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String APK_NAME) {
