@@ -1,11 +1,9 @@
-// src/common/upload.groovy
+// vars/upload.groovy
 
-//import static common.Project.NAME
-
-def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String APK_NAME) {
+def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String apkName) {
     // Your uploadArtifacts logic here
 
-    def artifactLink = "<a href='https://${projectName}-artifacts.s3.amazonaws.com/APK/${APK_NAME}.apk'>${APK_NAME}.apk</a>"
+    def artifactLink = "<a href='https://${projectName}-artifacts.s3.amazonaws.com/APK/${apkName}.apk'>${apkName}.apk</a>"
     currentBuild.description = artifactLink
 
     return artifactLink
