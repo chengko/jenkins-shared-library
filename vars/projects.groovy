@@ -1,7 +1,7 @@
 // vars/project.groovy
 
-def loadProject(String projectName) {
-    def content = libraryResource("projects/${projectName}.yml")
+def load(String projectName) {
+    def content = libraryResource("project/${projectName}.yml")
     def project = readYaml text: content
     echo "load project: $project.Name"
 
