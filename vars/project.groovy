@@ -1,7 +1,9 @@
 // vars/project.groovy
 
-package common
+def loadProject(String projectName) {
+    def content = libraryResource("projects/${projectName}.yml")
+    def project = readYaml text: content
+    echo "load project: $project.Name"
 
-class Project {
-    static String NAME = 'pocketstore'
+    return project
 }
