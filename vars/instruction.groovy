@@ -1,7 +1,26 @@
 
 
-def uploadArtifacts(Map project) {
-    echo project.Name
+def uploadAPK(Map project, String fromJob, String fromBuildNumber, String pattern, String fileanme) {
+    return uploadArtifacts(project, fromJob, fromBuildNumber, pattern, filename, "APK")
+}
+def uploadIPA(Map project, String fromJob, String fromBuildNumber, String pattern, String fileanme) {
+    return uploadArtifacts(project, fromJob, fromBuildNumber, pattern, filename, "IPA")
+}
+
+def uploadArtifacts(Map project, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
+    def buildResult = build job: 'Instruction/UploadArtifacts', parameters: [
+        string(name: 'projectName', value: project.Name),
+        string(name: 'fromJob', value: fromJob),
+        string(name: 'buildNumber', value: fromBuildNumber),
+        string(name: 'archivePattern', value: src),
+        string(name: 'changeName', value: dest),
+        string(name: 'dir', value: dir)]
+
+        if(dest == '') {
+            dest = src
+        }
+    def artifactLink = "<a href='${buildResult.description}/${dest}'>${dest}</a>"
+    currentBuild.description = artifactLink
 }
 /*
 def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String file) {
