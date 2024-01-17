@@ -1,5 +1,7 @@
 // vars/upload.groovy
 
+package instraction
+
 def call(String projectName, String fromJob, String fromBuildNumber, String apkName) {
     // Your uploadArtifacts logic here
 
@@ -7,8 +9,4 @@ def call(String projectName, String fromJob, String fromBuildNumber, String apkN
     currentBuild.description = artifactLink
 
     return artifactLink
-}
-
-def func2() {
-	
 }
