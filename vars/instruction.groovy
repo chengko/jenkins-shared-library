@@ -1,10 +1,10 @@
 
 
-def uploadAPK(Map project, String fromJob, String fromBuildNumber, String pattern, String fileanme) {
-    return uploadArtifacts(project, fromJob, fromBuildNumber, pattern, filename, "APK")
+def uploadAPK(Map project, String fromJob, String fromBuildNumber, String src, String dest) {
+    return uploadArtifacts(project, fromJob, fromBuildNumber, src, dest, "APK")
 }
-def uploadIPA(Map project, String fromJob, String fromBuildNumber, String pattern, String fileanme) {
-    return uploadArtifacts(project, fromJob, fromBuildNumber, pattern, filename, "IPA")
+def uploadIPA(Map project, String fromJob, String fromBuildNumber, String src, String dest) {
+    return uploadArtifacts(project, fromJob, fromBuildNumber, src, dest, "IPA")
 }
 
 def uploadArtifacts(Map project, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
