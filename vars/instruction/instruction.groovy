@@ -1,3 +1,6 @@
+//vars/instruction/instruction.grooy
+
+package instruction
 
 def foo() {
     
