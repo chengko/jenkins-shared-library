@@ -1,5 +1,6 @@
-//vars/instruction.grooy
+//vars/instruction/instruction.grooy
 
+package instruction
 
 def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String apkName) {
     // Your uploadArtifacts logic here
