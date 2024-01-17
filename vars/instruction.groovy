@@ -10,6 +10,6 @@ def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, 
     return artifactLink
 }
 
-def cc() {
+def foo() {
     
 }
