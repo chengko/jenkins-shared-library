@@ -1,10 +1,5 @@
-//vars/instruction/instruction.grooy
+//vars/instruction.grooy
 
-package instruction
-
-def foo() {
-    
-}
 
 def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String apkName) {
     // Your uploadArtifacts logic here
@@ -13,4 +8,8 @@ def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, 
     currentBuild.description = artifactLink
 
     return artifactLink
+}
+
+def foo() {
+    
 }
