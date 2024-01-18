@@ -2,11 +2,8 @@ Name: maruko
 Alias: com.gamania.chibimarukocheerfulspirit
 ClientPath: .
 
-Provision:
+ProvisioningProfile:
   development: maruko_dev
   ad-hoc: maruko_adhoc
   app-store: maruko_dis
-Secure:
-  User: maruko_istest@gamania.com
-  ParamA: 6b557133-6403-40b6-850c-5614b3438cd1
-  ParamC: ad7c5e77-bbe4-4ca2-80f0-00e9f55d6b58
+  

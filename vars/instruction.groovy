@@ -1,7 +1,24 @@
 
 
-def uploadAPK(Map project, String fromJob, String fromBuildNumber, String src, String dest) {
-    return uploadArtifacts(project, fromJob, fromBuildNumber, src, dest, "APK")
+def uploadAPK(Map project, String fromJob, String fromBuildNumber, Boolean appBundle = false, String deployMethod = 'Archive', String src = '*', String dest = '') {
+    
+    def job = fromJob
+    def buildNumber = fromBuildNumber
+    
+    if (deployMethod == 'Encrypt') {
+        
+        job = "Instruction/EncryptApk"
+        
+        def encryptResult = build job: fromJob, parameters: [
+            string(name: 'projectName', value: project.Name),
+            string(name: 'buildNumber', value: fromBuildNumber),
+            string(name: 'apkName', value: src), 
+            booleanParam(name: 'appBundle', value: appBundle)]
+            
+        buildNumber = encryptResult.number
+    }
+
+    return uploadArtifacts(project, job, buildNumber, src, dest, "APK")
 }
 def uploadIPA(Map project, String fromJob, String fromBuildNumber, String src, String dest) {
     return uploadArtifacts(project, fromJob, fromBuildNumber, src, dest, "IPA")

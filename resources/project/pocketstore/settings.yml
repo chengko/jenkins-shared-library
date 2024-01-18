@@ -2,12 +2,8 @@ Name: pocketstore
 Alias: com.gamania.pocketstorem
 ClientPath: GameProject/Model.Unity
 
-Provision:
+ProvisioningProfile:
   development: PocketStoreM_Development
   ad-hoc: PocketStoreM_Ad_Hoc0901
   app-store: PocketStoreM_Distribution
-
-Secure:
-  User: maruko_istest@gamania.com
-  ParamA: 6b557133-6403-40b6-850c-5614b3438cd1
-  ParamC: ad7c5e77-bbe4-4ca2-80f0-00e9f55d6b58
+  
