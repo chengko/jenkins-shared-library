@@ -1,5 +1,0 @@
-{
-  "SkipWebConfig": false,
-  "WebConfigIndexFileUrl": "https://pocketstore-artifacts.s3.amazonaws.com/WebConfig/Mingo/IndexFile.json",
-  "LocalSite": "Private_Mingo"
-}
