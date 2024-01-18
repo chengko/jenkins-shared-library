@@ -2,8 +2,12 @@ Name: pocketstore
 Alias: com.gamania.pocketstorem
 ClientPath: GameProject/Model.Unity
 
-ProvisioningProfile:
-  development: PocketStoreM_Development
-  ad-hoc: PocketStoreM_Ad_Hoc0901
-  app-store: PocketStoreM_Distribution
+iOS:
+  TeamID: 476TEU2UHA
+  Capacity: ""
+  LinkerFlags: ""
+  ProvisioningProfile:
+    development: PocketStoreM_Development
+    ad-hoc: PocketStoreM_Ad_Hoc0901
+    app-store: PocketStoreM_Distribution
   

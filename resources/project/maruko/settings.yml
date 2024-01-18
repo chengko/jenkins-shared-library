@@ -2,8 +2,13 @@ Name: maruko
 Alias: com.gamania.chibimarukocheerfulspirit
 ClientPath: .
 
-ProvisioningProfile:
-  development: maruko_dev
-  ad-hoc: maruko_adhoc
-  app-store: maruko_dis
+iOS:
+  TeamID: 3T6TWKGUYM
+  Capcity: ""
+  LinkerFlags: -ld64
+  ProvisioningProfile:
+    development: maruko_dev
+    ad-hoc: maruko_adhoc
+    app-store: maruko_dis
+
   
