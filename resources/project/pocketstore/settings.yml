@@ -4,7 +4,7 @@ ClientPath: GameProject/Model.Unity
 
 iOS:
   TeamID: 476TEU2UHA
-  Capacity: 
+  Capacity: ""
   LinkerFlags: ""
   ProvisioningProfile:
     development: PocketStoreM_Development
