@@ -28,7 +28,7 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
     return uploadArtifacts(projectName, job, buildNumber, src, dest, "APK")
 }
 def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String src, String dest) {
-    return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest, "IPA")
+    return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest + ".zip", "IPA")
 }
 
 def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
