@@ -12,10 +12,17 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
         def encryptResult = build job: fromJob, parameters: [
             string(name: 'projectName', value: projectName),
             string(name: 'buildNumber', value: fromBuildNumber),
-            string(name: 'apkName', value: src), 
+            string(name: 'apkName', value: dest), 
             booleanParam(name: 'appBundle', value: appBundle)]
             
+        dest = encryptResult.description
         buildNumber = encryptResult.number
+    } else {
+        if(appBundle) {
+            dest = dest + ".aab"
+        } else {
+            dest = dest + ".apk"
+        }
     }
 
     return uploadArtifacts(projectName, job, buildNumber, src, dest, "APK")
