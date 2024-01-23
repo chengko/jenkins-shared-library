@@ -1,6 +1,8 @@
-def buildAPK(String projectName, String bundleVersion, String versionCode, Boolean buildEmbededAssets, Boolean useApkExtension, Boolean appBundle, String gitURL, String branch, 
+// 
+
+def buildAPK(String projectName, String bundleVersion, String versionCode, Boolean buildEmbededAssets, Boolean appBundle, String gitURL, String branch, 
     String unityVersion, Boolean cleanWs, Boolean gitReset, Boolean archivePreviousBuild, String deployMethod, String archivePattern, String apkName, String customGradleVersion,
-    String appConfig = 'android', String buildTarget = 'Android', String buildMethod = 'CITool.BuildApp', String preprocess1 = '', String preprocess2 = '', Boolean useIL2CPP = true, Boolean debug = false) {
+    String appConfig = 'android', String buildTarget = 'Android', String buildMethod = 'CITool.BuildApp', String preprocess1 = '', String preprocess2 = '', Boolean useIL2CPP = true, Boolean useApkExtension = false, Boolean debug = false) {
     
     if(buildMethod == '') {
         buildMethod = '[DryRun]'
@@ -86,3 +88,5 @@ def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String
 
     return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest + ".zip", "IPA")
 }
+
+return this
