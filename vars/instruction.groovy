@@ -7,7 +7,7 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
         
         job = "Instruction/EncryptApk"
         
-        def encryptResult = build job: fromJob, parameters: [
+        def encryptResult = build job: job, parameters: [
             string(name: 'projectName', value: projectName),
             string(name: 'buildNumber', value: fromBuildNumber),
             string(name: 'apkName', value: dest), 
@@ -27,7 +27,7 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
 }
 
 def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String src, String dest) {
-    
+
     return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest + ".zip", "IPA")
 }
 
