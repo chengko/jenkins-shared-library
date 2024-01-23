@@ -33,11 +33,7 @@ def uploadArtifacts(Map project, String fromJob, String fromBuildNumber, String 
         string(name: 'changeName', value: dest),
         string(name: 'dir', value: dir)]
 
-        if(dest == '') {
-            dest = src
-        }
-    def artifactLink = "<a href='${buildResult.description}/${dest}'>${dest}</a>"
-    currentBuild.description = artifactLink
+    currentBuild.description = buildResult.description
 }
 /*
 def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String file) {
