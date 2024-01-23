@@ -1,6 +1,6 @@
 
 
-def uploadAPK(Map project, String fromJob, String fromBuildNumber, Boolean appBundle = false, String deployMethod = 'Archive', String src = '*', String dest = '') {
+def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolean appBundle = false, String deployMethod = 'Archive', String src = '*', String dest = '') {
     
     def job = fromJob
     def buildNumber = fromBuildNumber
@@ -10,7 +10,7 @@ def uploadAPK(Map project, String fromJob, String fromBuildNumber, Boolean appBu
         job = "Instruction/EncryptApk"
         
         def encryptResult = build job: fromJob, parameters: [
-            string(name: 'projectName', value: project.Name),
+            string(name: 'projectName', value: projectName),
             string(name: 'buildNumber', value: fromBuildNumber),
             string(name: 'apkName', value: src), 
             booleanParam(name: 'appBundle', value: appBundle)]
@@ -20,13 +20,13 @@ def uploadAPK(Map project, String fromJob, String fromBuildNumber, Boolean appBu
 
     return uploadArtifacts(project, job, buildNumber, src, dest, "APK")
 }
-def uploadIPA(Map project, String fromJob, String fromBuildNumber, String src, String dest) {
-    return uploadArtifacts(project, fromJob, fromBuildNumber, src, dest, "IPA")
+def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String src, String dest) {
+    return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest, "IPA")
 }
 
-def uploadArtifacts(Map project, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
+def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
     def buildResult = build job: 'Instruction/UploadArtifacts', parameters: [
-        string(name: 'projectName', value: project.Name),
+        string(name: 'projectName', value: projectName),
         string(name: 'fromJob', value: fromJob),
         string(name: 'buildNumber', value: fromBuildNumber),
         string(name: 'archivePattern', value: src),
