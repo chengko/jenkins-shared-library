@@ -18,7 +18,7 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
         buildNumber = encryptResult.number
     }
 
-    return uploadArtifacts(project, job, buildNumber, src, dest, "APK")
+    return uploadArtifacts(projectName, job, buildNumber, src, dest, "APK")
 }
 def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String src, String dest) {
     return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest, "IPA")
