@@ -94,7 +94,7 @@ def buildIOS(Map args = [:]) {
 
     def jobParameters = generateDefualtBuildUnityJobParameters(buildArgs)
 
-    jobParameters.add(booleanParam(name: 'provisioningProfile', value: buildArgs.provisioningProfile))
+    jobParameters.add(string(name: 'provisioningProfile', value: buildArgs.provisioningProfile))
 
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
