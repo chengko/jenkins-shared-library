@@ -34,6 +34,9 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
         booleanParam(name: 'gitReset', value: buildArgs.gitReset)
     ]
 
+    if(buildArgs.buildPath) {
+        jobParameters.add(string(name: 'buildPath', value: buildArgs.buildPath))
+    }
     if(buildArgs.output) {
         jobParameters.add(string(name: 'output', value: buildArgs.output))
     }

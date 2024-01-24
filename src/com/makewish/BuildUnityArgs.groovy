@@ -19,6 +19,7 @@ class BuildUnityArgs implements Serializable {
     Boolean gitReset = false
     Boolean buildEmbededAssets = false
     Boolean archivePreviousBuild = false
+    String buildPath
     String deployMethod = 'None'
     String archivePattern = ''
     String output
