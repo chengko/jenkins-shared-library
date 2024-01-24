@@ -19,13 +19,14 @@ class BuildUnityArgs implements Serializable {
     Boolean gitReset = false
     Boolean buildEmbededAssets = false
     Boolean archivePreviousBuild = false
-    String deployMethod
+    String deployMethod = 'None'
     String archivePattern = ''
     String output
     Boolean useIL2CPP = true
     Boolean debug = false
 
     String provisioningProfile
+    String customPlist
     
     Boolean appBundle = false
     Boolean useApkExtension = false

@@ -96,6 +96,10 @@ def buildIOS(Map args = [:]) {
 
     jobParameters.add(string(name: 'provisioningProfile', value: buildArgs.provisioningProfile))
 
+    if(buildArgs.customPlist) {
+        jobParameters.add(string(name: 'customPlist', value: buildArgs.customPlist))
+    }
+
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
     return result
