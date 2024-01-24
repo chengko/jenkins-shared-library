@@ -62,6 +62,14 @@ def buildAndroid(Map args = [:]) {
     if(buildArgs.appBundle) {
         buildArgs.useApkExtension = true
     }
+    if(buildArgs.deployMethod != 'None' && !buildArgs.archivePattern) {
+        if(buildArgs.appBundle) {
+            buildArgs.archivePattern = '*.aab'
+        } else {
+            buildArgs.archivePattern = '*.apk'
+        }
+    }
+
     println "after appBundle = ${buildArgs.appBundle} buildArgs.value = ${buildArgs.useApkExtension}"
 
     echo "begin build android, project = ${buildArgs.projectName}"
