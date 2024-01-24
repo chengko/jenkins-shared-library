@@ -9,9 +9,6 @@ def buildAPK(Map args = [:]) {
 
     echo "begin build unity project - ${buildArgs.projectName}"
 
-    if(buildMethod == '') {
-        buildMethod = '[DryRun]'
-    }
     def jobParameters = [
         string(name: 'projectName', value: buildArgs.projectName), 
         string(name: 'buildMethod', value: buildArgs.buildMethod), 
