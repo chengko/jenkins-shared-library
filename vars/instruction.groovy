@@ -53,7 +53,6 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
 def buildAndroid(Map args = [:]) {
     
     def buildArgs = new BuildUnityArgs('android', 'Android')
-
     fillValues(args, buildArgs)
 
     if(buildArgs.appBundle) {
@@ -85,11 +84,13 @@ def buildAndroid(Map args = [:]) {
 
 def buildIOS(Map args = [:]) {
     def buildArgs = new BuildUnityArgs('ios', 'iOS')
-    buildArgs.fill(args)
+    fillValues(args, buildArgs)
 
     echo "begin build ios, project = ${buildArgs.projectName}"
 
     def jobParameters = generateDefualtBuildUnityJobParameters(buildArgs)
+
+    jobParameters.add(booleanParam(name: 'provisioningProfile', value: buildArgs.provisioningProfile))
 
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
@@ -141,8 +142,8 @@ def uploadAPK(Map args = [:]) {
 }
 
 def uploadIPA(Map args = [:]) {
-
-    return uploadArtifacts(args.projectName, args.job, args.buildNumber, args.src, args.dest + ".zip", "IPA")
+    def uploadArgs = new UploadArtifactsArgs(args)
+    return uploadArtifacts(uploadArgs.projectName, uploadArgs.job, uploadArgs.buildNumber, uploadArgs.src, uploadArgs.dest + ".zip", "IPA")
 }
 
 return this
