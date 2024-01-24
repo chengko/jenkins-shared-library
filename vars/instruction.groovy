@@ -15,26 +15,27 @@ def buildAPK(Map args = [:]) {
     def jobParameters = [
         string(name: 'projectName', value: buildArgs.projectName), 
         string(name: 'buildMethod', value: buildArgs.buildMethod), 
-        string(name: 'appConfig', value: appConfig), 
-        string(name: 'bundleVersion', value: bundleVersion), 
-        booleanParam(name: 'useIL2CPP', value: useIL2CPP), 
-        booleanParam(name: 'debug', value: debug), 
-        string(name: 'versionCode', value: versionCode), 
-        booleanParam(name: 'useApkExtension', value: useApkExtension), 
-        booleanParam(name: 'appBundle', value: appBundle), 
-        string(name: 'output', value: apkName), 
-        booleanParam(name: 'buildEmbededAssets', value: buildEmbededAssets), 
-        string(name: 'gitURL', value: gitURL), 
-        string(name: 'branch', value: branch), 
-        string(name: 'buildTarget', value: buildTarget), 
-        string(name: 'buildImage', value: unityVersion), 
-        booleanParam(name: 'archivePreviousBuild', value: archivePreviousBuild), 
-        booleanParam(name: 'cleanWs', value: cleanWs), 
-        booleanParam(name: 'gitReset', value: gitReset), 
-        string(name: 'deployMethod', value: deployMethod), 
-        string(name: 'archivePattern', value: archivePattern)
+        string(name: 'appConfig', value: buildArgs.appConfig), 
+        string(name: 'bundleVersion', value: buildArgs.bundleVersion), 
+        booleanParam(name: 'useIL2CPP', value: buildArgs.useIL2CPP), 
+        booleanParam(name: 'debug', value: buildArgs.debug), 
+        string(name: 'versionCode', value: buildArgs.versionCode), 
+        booleanParam(name: 'useApkExtension', value: buildArgs.useApkExtension), 
+        booleanParam(name: 'appBundle', value: buildArgs.appBundle), 
+        string(name: 'output', value: buildArgs.apkName), 
+        booleanParam(name: 'buildEmbededAssets', value: buildArgs.buildEmbededAssets), 
+        string(name: 'gitURL', value: buildArgs.gitURL), 
+        string(name: 'branch', value: buildArgs.branch), 
+        string(name: 'buildTarget', value: buildArgs.buildTarget), 
+        string(name: 'buildImage', value: buildArgs.unityVersion), 
+        booleanParam(name: 'archivePreviousBuild', value: buildArgs.archivePreviousBuild), 
+        booleanParam(name: 'cleanWs', value: buildArgs.cleanWs), 
+        booleanParam(name: 'gitReset', value: buildArgs.gitReset), 
+        string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
-
+    if(buildArgs.archivePattern) {
+        jobParameters.add(sstring(name: 'archivePattern', value: buildArgs.archivePattern))
+    }
     if(buildArgs.preprocess1) {
         jobParameters.add(string(name: 'preprocess1', value: preprocess1))
     }
