@@ -5,8 +5,11 @@ import com.makewish.UploadArtifactsArgs
 
 def fillValues(source, target) {
     source.each{ key, value -> 
+        println "${key},${value}"
         if(target[key] instanceof Boolean) {
+            println "origin = ${target[key]}"
             target[key] = Boolean.valueOf(value)
+            println "after = ${target[key]}, ${Boolean.valueOf(value)}"
         } else {
             target[key] = value
         }
