@@ -1,8 +1,6 @@
 // vars/instructionBuildAPK.groovy
 
-def call(projectName, bundleVersion, versionCode, buildEmbededAssets, appBundle, gitURL, branch, 
-    unityVersion, cleanWs, gitReset, archivePreviousBuild, deployMethod, archivePattern, apkName, customGradleVersion,
-    appConfig = 'android', buildTarget = 'Android', buildMethod = 'CITool.BuildApp', preprocess1 = '', preprocess2 = '') {
+def call(projectName, bundleVersion, versionCode, buildEmbededAssets, appBundle, gitURL, branch) {
     
     echo "projectName: ${projectName}, appConfig:${appConfig}, gitURL:${gitURL}, buildTarget:${buildTarget}, debug:${debug}"
 }
