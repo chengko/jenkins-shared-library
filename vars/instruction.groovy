@@ -41,10 +41,14 @@ def buildAndroid(Map args = [:]) {
     
     def buildArgs = new BuildUnityArgs('android', 'Android')
     println "origin buildArgs.value = ${buildArgs.useApkExtension}"
-    buildArgs.fill(args)
+    //buildArgs.fill(args)
 
-    args.each{ value -> 
+    args.each{ key, value -> 
         println "args.value = $value"
+        println "origin buildArgs.value[${key} , ${buildArgs[key]}"
+        buildArgs[key] = value
+        
+        println "after buildArgs.value[${key} , ${buildArgs[key]}"
     }
 
     
