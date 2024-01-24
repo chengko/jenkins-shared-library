@@ -25,6 +25,7 @@ class BuildUnityArgs implements Serializable {
     String apkName
     String customGradleVersion
     Boolean useIL2CPP = true
+    Boolean useApkExtension = false
     Boolean debug = false
 
     BuildUnityArgs(String appConfig, String buildTarget) {
