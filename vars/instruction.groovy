@@ -1,5 +1,7 @@
 // vars/instruction.groovy
-
+def buildAPK1(parameters) {
+    echo parameters.projectName
+}
 def buildAPK(String projectName, String bundleVersion, String versionCode, Boolean buildEmbededAssets, Boolean appBundle, String gitURL, String branch, 
     String unityVersion, Boolean cleanWs, Boolean gitReset, Boolean archivePreviousBuild, String deployMethod, String archivePattern, String apkName, String customGradleVersion,
     String appConfig = 'android', String buildTarget = 'Android', String buildMethod = 'CITool.BuildApp', String preprocess1 = '', String preprocess2 = '', Boolean useIL2CPP = true, Boolean useApkExtension = false, Boolean debug = false) {
