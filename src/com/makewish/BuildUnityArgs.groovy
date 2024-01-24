@@ -1,4 +1,4 @@
-// src/instruction1/Foo.groovy
+// src/com/makewish/BuildUnityArgs.groovy
 
 package com.makewish
 

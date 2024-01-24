@@ -1,8 +1,9 @@
 // vars/instruction.groovy
 
 import com.makewish.BuildUnityArgs
+import com.makewish.UploadArtifactsArgs
 
-def buildAPK(Map args = [:]) {
+def buildAndroid(Map args = [:]) {
     
     def buildArgs = new BuildUnityArgs('android', 'Android')
     buildArgs.fill(args)
@@ -30,6 +31,7 @@ def buildAPK(Map args = [:]) {
         booleanParam(name: 'gitReset', value: buildArgs.gitReset), 
         string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
+
     if(buildArgs.archivePattern) {
         jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
@@ -44,16 +46,20 @@ def buildAPK(Map args = [:]) {
         println "Value: $value"
     }
 
-    //def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
+    def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
-    //return result
+    return result
 }
 
-def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
+def buildIOS(Map args = [:]) {
+}
+
+def uploadArtifacts(String projectName, String fromJob, String buildNumber, String src, String dest, String dir) {
+    
     def buildResult = build job: 'Instruction/UploadArtifacts', parameters: [
         string(name: 'projectName', value: projectName),
         string(name: 'fromJob', value: fromJob),
-        string(name: 'buildNumber', value: fromBuildNumber),
+        string(name: 'buildNumber', value: buildNumber),
         string(name: 'archivePattern', value: src),
         string(name: 'changeName', value: dest),
         string(name: 'dir', value: dir)]
@@ -61,20 +67,23 @@ def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, 
     currentBuild.description = buildResult.description
 }
 
-def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolean appBundle = false, String deployMethod = 'Archive', String src = '*', String dest = '') {
+def uploadAPK(Map args = [:]) {
     
-    def job = fromJob
-    def buildNumber = fromBuildNumber
+    def uploadArgs = new UploadArtifactsArgs(args)
+
+    def job = uploadArgs.job
+    def buildNumber = uploadArgs.buildNumber
+    def dest = uploadArgs.dest
     
-    if (deployMethod == 'Encrypt') {
+    if (uploadArgs.deployMethod == 'Encrypt') {
         
         job = "Instruction/EncryptApk"
         
         def encryptResult = build job: job, parameters: [
-            string(name: 'projectName', value: projectName),
-            string(name: 'buildNumber', value: fromBuildNumber),
-            string(name: 'apkName', value: dest), 
-            booleanParam(name: 'appBundle', value: appBundle)]
+            string(name: 'projectName', value: uploadArgs.projectName),
+            string(name: 'buildNumber', value: uploadArgs.buildNumber),
+            string(name: 'apkName', value: uploadArgs.dest), 
+            booleanParam(name: 'appBundle', value: uploadArgs.appBundle)]
             
         dest = encryptResult.description
         buildNumber = encryptResult.number
@@ -86,12 +95,12 @@ def uploadAPK(String projectName, String fromJob, String fromBuildNumber, Boolea
         }
     }
 
-    return uploadArtifacts(projectName, job, buildNumber, src, dest, "APK")
+    return uploadArtifacts(uploadArgs.projectName, job, buildNumber, uploadArgs.src, dest, "APK")
 }
 
-def uploadIPA(String projectName, String fromJob, String fromBuildNumber, String src, String dest) {
+def uploadIPA(Map args = [:]) {
 
-    return uploadArtifacts(projectName, fromJob, fromBuildNumber, src, dest + ".zip", "IPA")
+    return uploadArtifacts(args.projectName, args.job, args.buildNumber, args.src, args.dest + ".zip", "IPA")
 }
 
 return this
