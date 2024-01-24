@@ -18,7 +18,6 @@ def buildAndroid(Map args = [:]) {
         booleanParam(name: 'useIL2CPP', value: buildArgs.useIL2CPP), 
         booleanParam(name: 'debug', value: buildArgs.debug), 
         string(name: 'versionCode', value: buildArgs.versionCode), 
-        booleanParam(name: 'useApkExtension', value: buildArgs.useApkExtension), 
         booleanParam(name: 'appBundle', value: buildArgs.appBundle), 
         string(name: 'output', value: buildArgs.apkName), 
         booleanParam(name: 'buildEmbededAssets', value: buildArgs.buildEmbededAssets), 
@@ -31,6 +30,10 @@ def buildAndroid(Map args = [:]) {
         booleanParam(name: 'gitReset', value: buildArgs.gitReset), 
         string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
+    
+    if(buildArgs.appBundle) {
+        jobParameters.add(booleanParam(name: 'useApkExtension', value: true))
+    }
 
     if(buildArgs.customGradleVersion) {
         jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
@@ -52,7 +55,7 @@ def buildAndroid(Map args = [:]) {
     
 
     return null
-    
+
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
     return result
