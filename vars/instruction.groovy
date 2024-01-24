@@ -33,7 +33,7 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
         booleanParam(name: 'cleanWs', value: buildArgs.cleanWs), 
         booleanParam(name: 'gitReset', value: buildArgs.gitReset)
     ]
-    
+
     if(buildArgs.output) {
         jobParameters.add(string(name: 'output', value: buildArgs.output))
     }
@@ -77,10 +77,7 @@ def buildAndroid(Map args = [:]) {
     if(buildArgs.customGradleVersion) {
         jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
     }
-    jobParameters.each{ value -> 
-        println "jobParameters.value = $value"
-    }
-    return null
+    
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
     return result
