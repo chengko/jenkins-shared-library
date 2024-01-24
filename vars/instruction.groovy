@@ -31,7 +31,7 @@ def buildAPK(Map args = [:]) {
         string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
     if(buildArgs.archivePattern) {
-        jobParameters.add(sstring(name: 'archivePattern', value: buildArgs.archivePattern))
+        jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
     if(buildArgs.preprocess1) {
         jobParameters.add(string(name: 'preprocess1', value: preprocess1))
