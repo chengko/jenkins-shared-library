@@ -44,7 +44,7 @@ def buildAndroid(Map args = [:]) {
     //buildArgs.fill(args)
 
     args.each{ key, value -> 
-        println "args.value = $value"
+        println "args.value = ${value}, ${value.getClass()}"
         println "origin buildArgs.value[${key} , ${buildArgs[key]}"
         buildArgs[key] = value
         
