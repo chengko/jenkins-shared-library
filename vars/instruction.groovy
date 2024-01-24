@@ -48,7 +48,7 @@ def buildAndroid(Map args = [:]) {
         println "origin buildArgs.value[${key} , ${buildArgs[key]}"
         
 
-        if(buildArgs[key] instnaceof Boolean && !(value instnaceof Boolean)) {
+        if(buildArgs[key] instanceof Boolean && !(value instanceof Boolean)) {
             buildArgs[key] = Boolean.valueOf(value)
         } else {
             buildArgs[key] = value
