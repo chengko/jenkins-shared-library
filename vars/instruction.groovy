@@ -112,6 +112,8 @@ def uploadArtifacts(String projectName, String fromJob, String buildNumber, Stri
         string(name: 'dir', value: dir)]
 
     currentBuild.description = buildResult.description
+
+    return buildResult
 }
 
 def uploadAPK(Map args = [:]) {
