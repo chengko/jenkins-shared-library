@@ -113,7 +113,7 @@ def uploadArtifacts(projectName, fromJob, buildNumber, src, dest, dir) {
     def buildResult = build job: 'Instruction/UploadArtifacts', parameters: [
         string(name: 'projectName', value: projectName),
         string(name: 'fromJob', value: fromJob),
-        string(name: 'buildNumber', value: buildNumber),
+        string(name: 'buildNumber', value: "$buildNumber"),
         string(name: 'archivePattern', value: src),
         string(name: 'changeName', value: dest),
         string(name: 'dir', value: dir)]
