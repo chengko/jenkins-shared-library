@@ -5,8 +5,8 @@ package com.makewish
 class BuildUnityArgs implements Serializable {
     String projectName
     String buildMethod = 'CITool.BuildApp'
-    bool useIL2CPP = true
-    bool debug = false
+    Boolean useIL2CPP = true
+    Boolean debug = false
 
     BuildUnityArgs(Map args = [:]) {
         projectName = args['projectName']
