@@ -32,6 +32,10 @@ def buildAndroid(Map args = [:]) {
         string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
 
+    if(buildArgs.customGradleVersion) {
+        jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
+    }
+
     if(buildArgs.archivePattern) {
         jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
@@ -45,7 +49,10 @@ def buildAndroid(Map args = [:]) {
     jobParameters.each { value ->
         println "Value: $value"
     }
+    
 
+    return null
+    
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
     return result
