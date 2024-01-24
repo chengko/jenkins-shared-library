@@ -1,5 +1,5 @@
 // vars/instructionBuildAPK.groovy
-import com.make-wish.BuildUnityArgs
+import com.makewish.BuildUnityArgs
 
 def call(Map parameters = [:]) {
     def debug = parameters.debug ?: false

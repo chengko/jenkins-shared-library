@@ -1,6 +1,6 @@
 // src/instruction1/Foo.groovy
 
-package com.make-wish
+package com.makewish
 
 class BuildUnityArgs implements Serializable {
     String projectName
