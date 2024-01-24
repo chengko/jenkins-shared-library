@@ -42,9 +42,14 @@ def buildAndroid(Map args = [:]) {
     def buildArgs = new BuildUnityArgs('android', 'Android')
     buildArgs.fill(args)
 
+    args.each{ value -> 
+        println "args.value = $value"
+    }
+    println "buildArgs.value = ${buildArgs.useApkExtension}"
     if(buildArgs.appBundle == true) {
         buildArgs.useApkExtension = true
     }
+    println "after appBundle = ${buildArgs.appBundle} buildArgs.value = ${buildArgs.useApkExtension}"
 
     echo "begin build android, project = ${buildArgs.projectName}"
 
@@ -57,7 +62,7 @@ def buildAndroid(Map args = [:]) {
         jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
     }
     jobParameters.each{ value -> 
-        println "value = $value"
+        println "jobParameters.value = $value"
     }
     return null
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
