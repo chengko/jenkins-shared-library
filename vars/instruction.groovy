@@ -46,7 +46,13 @@ def buildAndroid(Map args = [:]) {
     args.each{ key, value -> 
         println "args.value = ${value}, ${value.getClass()}"
         println "origin buildArgs.value[${key} , ${buildArgs[key]}"
-        buildArgs[key] = value
+        
+
+        if(buildArgs[key] instnaceof Boolean && !(value instnaceof Boolean)) {
+            buildArgs[key] = Boolean.valueOf(value)
+        } else {
+            buildArgs[key] = value
+        }
         
         println "after buildArgs.value[${key} , ${buildArgs[key]}"
     }
