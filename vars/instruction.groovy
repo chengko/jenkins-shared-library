@@ -34,10 +34,10 @@ def buildAPK(Map args = [:]) {
         jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
     if(buildArgs.preprocess1) {
-        jobParameters.add(string(name: 'preprocess1', value: preprocess1))
+        jobParameters.add(string(name: 'preprocess1', value: buildArgs.preprocess1))
     }
     if(buildArgs.preprocess2) {
-        jobParameters.add(string(name: 'preprocess2', value: preprocess2))
+        jobParameters.add(string(name: 'preprocess2', value: buildArgs.preprocess2))
     }
 
     jobParameters.each { value ->
