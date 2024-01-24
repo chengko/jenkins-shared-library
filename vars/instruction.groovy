@@ -88,7 +88,7 @@ def uploadAPK(Map args = [:]) {
         dest = encryptResult.description
         buildNumber = encryptResult.number
     } else {
-        if(appBundle) {
+        if(uploadArgs.appBundle) {
             dest = dest + ".aab"
         } else {
             dest = dest + ".apk"
