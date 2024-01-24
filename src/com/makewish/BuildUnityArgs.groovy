@@ -22,7 +22,7 @@ class BuildUnityArgs implements Serializable {
     Boolean archivePreviousBuild = false
     String deployMethod
     String archivePattern = ''
-    String apkName
+    String output
     String customGradleVersion
     Boolean useIL2CPP = true
     Boolean useApkExtension = false

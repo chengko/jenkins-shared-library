@@ -24,7 +24,6 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
         booleanParam(name: 'useIL2CPP', value: buildArgs.useIL2CPP), 
         booleanParam(name: 'debug', value: buildArgs.debug), 
         string(name: 'versionCode', value: buildArgs.versionCode), 
-        string(name: 'output', value: buildArgs.apkName), 
         booleanParam(name: 'buildEmbededAssets', value: buildArgs.buildEmbededAssets), 
         string(name: 'gitURL', value: buildArgs.gitURL), 
         string(name: 'branch', value: buildArgs.branch), 
@@ -32,10 +31,12 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
         string(name: 'buildImage', value: buildArgs.unityVersion), 
         booleanParam(name: 'archivePreviousBuild', value: buildArgs.archivePreviousBuild), 
         booleanParam(name: 'cleanWs', value: buildArgs.cleanWs), 
-        booleanParam(name: 'gitReset', value: buildArgs.gitReset), 
-        string(name: 'deployMethod', value: buildArgs.deployMethod)
+        booleanParam(name: 'gitReset', value: buildArgs.gitReset)
     ]
-
+    
+    if(buildArgs.output) {
+        jobParameters.add(string(name: 'output', value: buildArgs.output))
+    }
     if(buildArgs.archivePattern) {
         jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
@@ -52,12 +53,8 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
 def buildAndroid(Map args = [:]) {
     
     def buildArgs = new BuildUnityArgs('android', 'Android')
-    println "origin buildArgs.value = ${buildArgs.useApkExtension}"
-    //buildArgs.fill(args)
 
     fillValues(args, buildArgs)
-
-    println "prev buildArgs.value = ${buildArgs.useApkExtension}"
 
     if(buildArgs.appBundle) {
         buildArgs.useApkExtension = true
@@ -69,8 +66,6 @@ def buildAndroid(Map args = [:]) {
             buildArgs.archivePattern = '*.apk'
         }
     }
-
-    println "after appBundle = ${buildArgs.appBundle} buildArgs.value = ${buildArgs.useApkExtension}"
 
     echo "begin build android, project = ${buildArgs.projectName}"
 
