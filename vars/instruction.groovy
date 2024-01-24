@@ -108,7 +108,7 @@ def buildIOS(Map args = [:]) {
     return result
 }
 
-def uploadArtifacts(String projectName, String fromJob, String buildNumber, String src, String dest, String dir) {
+def uploadArtifacts(projectName, fromJob, buildNumber, src, dest, dir) {
     
     def buildResult = build job: 'Instruction/UploadArtifacts', parameters: [
         string(name: 'projectName', value: projectName),
@@ -145,18 +145,18 @@ def uploadAPK(Map args = [:]) {
         buildNumber = encryptResult.number
     } else {
         if(uploadArgs.appBundle) {
-            dest = dest + ".aab"
+            dest = dest + '.aab'
         } else {
-            dest = dest + ".apk"
+            dest = dest + '.apk'
         }
     }
 
-    return uploadArtifacts(uploadArgs.projectName, job, buildNumber, uploadArgs.src, dest, "APK")
+    return uploadArtifacts(uploadArgs.projectName, job, buildNumber, uploadArgs.src, dest, 'APK')
 }
 
 def uploadIPA(Map args = [:]) {
     def uploadArgs = new UploadArtifactsArgs(args)
-    return uploadArtifacts(uploadArgs.projectName, uploadArgs.job, uploadArgs.buildNumber, uploadArgs.src, uploadArgs.dest + ".zip", "IPA")
+    return uploadArtifacts(uploadArgs.projectName, uploadArgs.job, uploadArgs.buildNumber, uploadArgs.src, uploadArgs.dest + '.zip', 'IPA')
 }
 
 return this
