@@ -40,12 +40,12 @@ def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
 def buildAndroid(Map args = [:]) {
     
     def buildArgs = new BuildUnityArgs('android', 'Android')
+    println "prev buildArgs.value = ${buildArgs.useApkExtension}"
     buildArgs.fill(args)
 
     args.each{ value -> 
         println "args.value = $value"
     }
-    println "buildArgs.value = ${buildArgs.useApkExtension}"
     if(buildArgs.appBundle == true) {
         buildArgs.useApkExtension = true
     }
