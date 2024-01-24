@@ -1,4 +1,5 @@
 // vars/instructionBuildAPK.groovy
+import com.make-wish.BuildUnityArgs
 
 def call(Map parameters = [:]) {
     def debug = parameters.debug ?: false
@@ -15,6 +16,13 @@ def call(Map parameters = [:]) {
         echo "2debug is ${parameters.debug}"
     } else {
         echo "2debug is false"
+    }
+
+    def args = new BuildUnityArgs(parameters)
+
+    args.getMetaClass().properties.each { propertyName ->
+        def propertyValue = myObject."$propertyName"
+        println "Field $propertyName value: $propertyValue"
     }
 }
 
