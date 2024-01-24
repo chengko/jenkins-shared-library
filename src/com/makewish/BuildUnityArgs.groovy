@@ -16,7 +16,7 @@ class BuildUnityArgs implements Serializable {
             } catch (MissingPropertyException e) {
                 // Field does not exist in the object
                 println "Field '$key' does not exist in the object. Available fields: ${this.properties.keySet()}"
-                throw
+                //throw e
             }
         }
     }
