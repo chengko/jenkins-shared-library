@@ -21,7 +21,8 @@ def call(Map parameters = [:]) {
     def args = new BuildUnityArgs(parameters)
 
     args.getMetaClass().properties.each { propertyName ->
-        def propertyValue = args["$propertyName"]
+        println "Field $propertyName"
+        def propertyValue = args."$propertyName"
         println "Field $propertyName value: $propertyValue"
     }
 }
