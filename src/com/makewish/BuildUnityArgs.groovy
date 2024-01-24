@@ -12,21 +12,24 @@ class BuildUnityArgs implements Serializable {
     String buildMethod = 'CITool.BuildApp'
     String preprocess1
     String preprocess2
-    Boolean buildEmbededAssets = false
-    Boolean appBundle = false
+    String unityVersion
     String gitURL
     String branch
-    String unityVersion
     Boolean cleanWs = false
     Boolean gitReset = false
+    Boolean buildEmbededAssets = false
     Boolean archivePreviousBuild = false
     String deployMethod
     String archivePattern = ''
     String output
-    String customGradleVersion
     Boolean useIL2CPP = true
-    Boolean useApkExtension = false
     Boolean debug = false
+
+    String provisioningProfile
+    
+    Boolean appBundle = false
+    String customGradleVersion
+    Boolean useApkExtension = false
 
     BuildUnityArgs(String appConfig, String buildTarget) {
         this.appConfig = appConfig
