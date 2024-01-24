@@ -9,7 +9,7 @@ class BuildUnityArgs implements Serializable {
     Boolean debug = false
 
     BuildUnityArgs(Map args = [:]) {
-        println "Building..."
+        echo "Building..."
         args.each { key, value ->
             try {
                 this[key] = value
