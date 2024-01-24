@@ -40,8 +40,8 @@ def buildAPK(Map args = [:]) {
         jobParameters.add(string(name: 'preprocess2', value: preprocess2))
     }
 
-    jobParameters.each { key, value ->
-        println "Key: $key, Value: $value"
+    jobParameters.each { value ->
+        println "Value: $value"
     }
 
     //def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
