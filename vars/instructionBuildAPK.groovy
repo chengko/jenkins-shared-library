@@ -22,7 +22,7 @@ def call(Map parameters = [:]) {
     def metaPro = args.getMetaClass().properties
     println "class - $metaPro"
     args.getMetaClass().properties.each { propertyName ->
-        println "Field $propertyName"
+        println "Field $propertyName.name"
         //def propertyValue = args."$propertyName"
         //println "Field $propertyName value: $propertyValue"
     }
