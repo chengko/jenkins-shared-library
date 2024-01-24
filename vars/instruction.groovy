@@ -1,18 +1,20 @@
 // vars/instruction.groovy
-def buildAPK1(parameters) {
-    echo parameters.projectName
-}
-def buildAPK(String projectName, String bundleVersion, String versionCode, Boolean buildEmbededAssets, Boolean appBundle, String gitURL, String branch, 
-    String unityVersion, Boolean cleanWs, Boolean gitReset, Boolean archivePreviousBuild, String deployMethod, String archivePattern, String apkName, String customGradleVersion,
-    String appConfig = 'android', String buildTarget = 'Android', String buildMethod = 'CITool.BuildApp', String preprocess1 = '', String preprocess2 = '', Boolean useIL2CPP = true, Boolean useApkExtension = false, Boolean debug = false) {
+
+import com.makewish.BuildUnityArgs
+
+def buildAPK(Map args = [:]) {
     
+    def buildArgs = new BuildUnityArgs('android', 'Android')
+    buildArgs.fill(args)
+
+    echo "begin build unity project - ${buildArgs.projectName}"
+
     if(buildMethod == '') {
         buildMethod = '[DryRun]'
     }
-
-    def buildParameters = [
-        string(name: 'projectName', value: projectName), 
-        string(name: 'buildMethod', value: buildMethod), 
+    def jobParameters = [
+        string(name: 'projectName', value: buildArgs.projectName), 
+        string(name: 'buildMethod', value: buildArgs.buildMethod), 
         string(name: 'appConfig', value: appConfig), 
         string(name: 'bundleVersion', value: bundleVersion), 
         booleanParam(name: 'useIL2CPP', value: useIL2CPP), 
@@ -33,17 +35,20 @@ def buildAPK(String projectName, String bundleVersion, String versionCode, Boole
         string(name: 'archivePattern', value: archivePattern)
     ]
 
-    if(preprocess1 != '') {
-        buildParameters.add(string(name: 'preprocess1', value: preprocess1))
+    if(buildArgs.preprocess1) {
+        jobParameters.add(string(name: 'preprocess1', value: preprocess1))
     }
-    if(preprocess2 != '') {
-        buildParameters.add(string(name: 'preprocess2', value: preprocess2))
+    if(buildArgs.preprocess2) {
+        jobParameters.add(string(name: 'preprocess2', value: preprocess2))
     }
 
+    jobParameters.each { key, value ->
+        println "Key: $key, Value: $value"
+    }
 
-    def result = build job: 'Instruction/BuildUnity', parameters: buildParameters
+    //def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
-    return result
+    //return result
 }
 
 def uploadArtifacts(String projectName, String fromJob, String fromBuildNumber, String src, String dest, String dir) {
