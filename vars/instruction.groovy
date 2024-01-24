@@ -42,7 +42,7 @@ def buildAndroid(Map args = [:]) {
     def buildArgs = new BuildUnityArgs('android', 'Android')
     buildArgs.fill(args)
 
-    if(buildArgs.appBundle) {
+    if(buildArgs.appBundle == true) {
         buildArgs.useApkExtension = true
     }
 
