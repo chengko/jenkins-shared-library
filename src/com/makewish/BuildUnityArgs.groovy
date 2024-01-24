@@ -28,8 +28,9 @@ class BuildUnityArgs implements Serializable {
     String provisioningProfile
     
     Boolean appBundle = false
-    String customGradleVersion
     Boolean useApkExtension = false
+    String sdkVersion
+    String customGradleVersion
 
     BuildUnityArgs(String appConfig, String buildTarget) {
         this.appConfig = appConfig

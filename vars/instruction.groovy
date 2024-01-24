@@ -76,6 +76,10 @@ def buildAndroid(Map args = [:]) {
     if(buildArgs.customGradleVersion) {
         jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
     }
+
+    if(buildArgs.sdkVersion) {
+        jobParameters.add(string(name: 'sdkVersion', value: buildArgs.sdkVersion))
+    }
     
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
