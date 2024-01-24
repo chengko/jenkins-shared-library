@@ -3,17 +3,7 @@
 import com.makewish.BuildUnityArgs
 import com.makewish.UploadArtifactsArgs
 
-def buildAndroid(Map args = [:]) {
-    
-    def buildArgs = new BuildUnityArgs('android', 'Android')
-    buildArgs.fill(args)
-    
-    if(buildArgs.appBundle) {
-        buildArgs.useApkExtension = true
-    }
-
-    echo "begin build unity project - ${buildArgs.projectName}"
-
+def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
     def jobParameters = [
         string(name: 'projectName', value: buildArgs.projectName), 
         string(name: 'buildMethod', value: buildArgs.buildMethod), 
@@ -22,8 +12,6 @@ def buildAndroid(Map args = [:]) {
         booleanParam(name: 'useIL2CPP', value: buildArgs.useIL2CPP), 
         booleanParam(name: 'debug', value: buildArgs.debug), 
         string(name: 'versionCode', value: buildArgs.versionCode), 
-        booleanParam(name: 'useApkExtension', value: buildArgs.useApkExtension), 
-        booleanParam(name: 'appBundle', value: buildArgs.appBundle), 
         string(name: 'output', value: buildArgs.apkName), 
         booleanParam(name: 'buildEmbededAssets', value: buildArgs.buildEmbededAssets), 
         string(name: 'gitURL', value: buildArgs.gitURL), 
@@ -36,10 +24,6 @@ def buildAndroid(Map args = [:]) {
         string(name: 'deployMethod', value: buildArgs.deployMethod)
     ]
 
-    if(buildArgs.customGradleVersion) {
-        jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
-    }
-
     if(buildArgs.archivePattern) {
         jobParameters.add(string(name: 'archivePattern', value: buildArgs.archivePattern))
     }
@@ -50,12 +34,28 @@ def buildAndroid(Map args = [:]) {
         jobParameters.add(string(name: 'preprocess2', value: buildArgs.preprocess2))
     }
 
-    jobParameters.each { value ->
-        println "Value: $value"
-    }
-    
+    return jobParameters
+}
 
-    return null
+def buildAndroid(Map args = [:]) {
+    
+    def buildArgs = new BuildUnityArgs('android', 'Android')
+    buildArgs.fill(args)
+
+    if(buildArgs.appBundle) {
+        buildArgs.useApkExtension = true
+    }
+
+    echo "begin build android, project = ${buildArgs.projectName}"
+
+    def jobParameters = generateDefualtBuildUnityJobParameters(buildArgs)
+
+    jobParameters.add(booleanParam(name: 'appBundle', value: buildArgs.appBundle))
+    jobParameters.add(booleanParam(name: 'useApkExtension', value: buildArgs.useApkExtension))
+
+    if(buildArgs.customGradleVersion) {
+        jobParameters.add(string(name: 'customGradleVersion', value: buildArgs.customGradleVersion))
+    }
 
     def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
 
@@ -63,6 +63,16 @@ def buildAndroid(Map args = [:]) {
 }
 
 def buildIOS(Map args = [:]) {
+    def buildArgs = new BuildUnityArgs('ios', 'iOS')
+    buildArgs.fill(args)
+
+    echo "begin build ios, project = ${buildArgs.projectName}"
+
+    def jobParameters = generateDefualtBuildUnityJobParameters(buildArgs)
+
+    def result = build job: 'Instruction/BuildUnity', parameters: jobParameters
+
+    return result
 }
 
 def uploadArtifacts(String projectName, String fromJob, String buildNumber, String src, String dest, String dir) {
