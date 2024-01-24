@@ -14,7 +14,5 @@ class UploadArtifactsArgs implements Serializable {
     String deployMethod = 'Archive'
     Boolean appBundle = false
 
-    UploadArtifactsArgs(Map args = [:]) {
-        args.each { key, value -> this[key] = value }
-    }
+    def normalize() {}
 }

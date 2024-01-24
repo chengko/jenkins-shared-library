@@ -3,6 +3,18 @@
 import com.makewish.BuildUnityArgs
 import com.makewish.UploadArtifactsArgs
 
+def fillValues(source, target) {
+    source.each{ key, value -> 
+        if(target[key] instanceof Boolean && !(value instanceof Boolean)) {
+            target[key] = Boolean.valueOf(value)
+        } else {
+            target[key] = value
+        }
+    }
+
+    target.normalize()
+}
+
 def generateDefualtBuildUnityJobParameters(BuildUnityArgs buildArgs) {
     def jobParameters = [
         string(name: 'projectName', value: buildArgs.projectName), 
@@ -43,23 +55,13 @@ def buildAndroid(Map args = [:]) {
     println "origin buildArgs.value = ${buildArgs.useApkExtension}"
     //buildArgs.fill(args)
 
-    args.each{ key, value -> 
-        println "args.value = ${value}, ${value.getClass()}"
-        println "origin buildArgs.value[${key} , ${buildArgs[key]}"
-        
-
-        if(buildArgs[key] instanceof Boolean && !(value instanceof Boolean)) {
-            buildArgs[key] = Boolean.valueOf(value)
-        } else {
-            buildArgs[key] = value
-        }
-        
-        println "after buildArgs.value[${key} , ${buildArgs[key]}"
-    }
+    fillValues(args, buildArgs)
 
     
+
     println "prev buildArgs.value = ${buildArgs.useApkExtension}"
-    if(buildArgs.appBundle == true) {
+
+    if(buildArgs.appBundle) {
         buildArgs.useApkExtension = true
     }
     println "after appBundle = ${buildArgs.appBundle} buildArgs.value = ${buildArgs.useApkExtension}"

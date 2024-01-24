@@ -33,8 +33,8 @@ class BuildUnityArgs implements Serializable {
         this.buildTarget = buildTarget
     }
 
-    def fill(Map args = [:]) {
-        args.each { key, value -> this[key] = value }
+    def normalize() {
+
         if(this.buildMethod == '') {
             this.buildMethod = '[DryRun]'
         }
