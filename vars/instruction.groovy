@@ -5,7 +5,7 @@ import com.makewish.UploadArtifactsArgs
 
 def fillValues(source, target) {
     source.each{ key, value -> 
-        if(target[key] instanceof Boolean && !(value instanceof Boolean)) {
+        if(target[key] instanceof Boolean) {
             target[key] = Boolean.valueOf(value)
         } else {
             target[key] = value
